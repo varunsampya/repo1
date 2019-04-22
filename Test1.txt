@@ -1,0 +1,10 @@
+ Volume in drive C is OS
+ Volume Serial Number is EE07-D37F
+
+ Directory of C:\Users\Ananya\Desktop\MyProject
+
+04/23/2019  02:02 AM    <DIR>          .
+04/23/2019  02:02 AM    <DIR>          ..
+04/23/2019  02:02 AM                 0 Test1.txt
+               1 File(s)              0 bytes
+               2 Dir(s)  114,487,615,488 bytes free
