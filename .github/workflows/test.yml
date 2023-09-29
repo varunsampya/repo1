@@ -1,23 +1,10 @@
 name: dataiku
 
 on:
-  workflow_dispatch:
-    inputs:
-      adfsAccount:
-        description: 'ADFS account'
-        default: 'svc-dataiku-dev@dci.local'
-      awsAccountID:
-        required: true
-        description: 'AWS account'
-        default: '59896079094'
-      tenant:
-        type: choice
-        required: true
-        description: 'The tenant to update'
-        options:
-        - 'tenantA'
-        - 'tenantB'
-        - 'multi_projects'
+  push:
+       branches: main
+       
+     
 
 jobs:
   GenerateUniqueBundleName:
@@ -31,14 +18,13 @@ jobs:
         run: |
           CURRENT_DATETIME=$(date +%Y-%m-%d_%H-%m-%S)
           CREATE_BUNDLE="tenantA_${CURRENT_DATETIME}"
-          echo "CREATE_BUNDLE=${CREATE_BUNDLE}" >> $GITHUB_ENV
-          echo ${CREATE_BUNDLE}
-
+          echo "CREATE_BUNDLE=${CREATE_BUNDLE}"
+          echo "::set-output name=CREATE_BUNDLE::${CREATE_BUNDLE}"
+          
   EchoCreateBundleFromOtherJobs:
     name: Echo create bundle from other jobs
     needs: GenerateUniqueBundleName
     runs-on: ubuntu-latest
     steps:
-      - name: Echo create bundle from other jobs
-        run: |
-           echo ${{ needs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE }}
+      - name: Debug CREATE_BUNDLE in EchoCreateBundleFromOtherJobs
+        run: echo "CREATE_BUNDLE=${{ needs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE }}"
