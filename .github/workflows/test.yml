@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 env:
-  name_a: "test + $(date +%Y%m%d%H%M%S)"
+  name_a: "test_$(date +%Y%m%d%H%M%S)"
 
 jobs:
   print_env_var:
