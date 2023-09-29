@@ -2,7 +2,7 @@ name: dataiku
 
 on:
   push:
-       branches: masteR
+       branches: master
 
 env: 
     CREATE_BUNDLE: test_${{ github.event.repository.updated_at}}
