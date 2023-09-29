@@ -9,7 +9,7 @@ on:
       awsAccountID:
         required: true
         description: 'AWS account'
-        default: '750115702482'
+        default: '59896079094'
       tenant:
         type: choice
         required: true
