@@ -1,17 +1,29 @@
-name: Print Workflow Environment Variable with Current Time
+---
+  name: Print Workflow Environment Variable with Current Time
+  on:
+    workflow_dispatch:
+      inputs:
+        tenant:
+          type: choice
+          required: true
+          description: 'The tenant to update'
+          options:
+          - 'tenantA'
 
-on:
-  push:
-    branches: [ master ]
+  env:
+     CREATE_BUNDLE: ${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)
 
-env:
-  name_a: test_$(date +%Y%m%d%H%M%S)
+  jobs:
+    bundle-creation:
+      name: BundleCreation
+      runs-on: ubuntu-latest
+      
 
-jobs:
-  print_env_var:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print name
-        run: echo "${{ env.name_a }}"
-          
+         
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+
+        - name: echo
+          run: echo ${{ env.CREATE_BUNDLE }}
   
