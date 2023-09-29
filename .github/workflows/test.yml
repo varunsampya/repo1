@@ -1,15 +1,16 @@
-name: Print Workflow Environment Variable
+name: Print Workflow Environment Variable with Current Time
 
 on:
   push:
     branches: [ master ]
 
 env:
-  MY_ENV_VAR: "test_${GITHUB.USER}"
+  name: "test + $(date +%Y%m%d%H%M%S)"
 
 jobs:
   print_env_var:
     runs-on: ubuntu-latest
     steps:
-      - name: Print MY_ENV_VAR
-        run: echo "${{ env.MY_ENV_VAR }}"
+      - name: Print name
+        run: echo "${{ env.name }}"
+
