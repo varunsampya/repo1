@@ -19,25 +19,25 @@ on:
         - 'tenantB'
         - 'multi_projects'
 
-
 jobs:
   GenerateUniqueBundleName:
     name: Generate unique bundle name
     runs-on: ubuntu-latest
+    outputs:
+      CREATE_BUNDLE: ${{ steps.generate.outputs.CREATE_BUNDLE }}
     steps:
       - name: Generate unique bundle name
+        id: generate
         run: |
           CURRENT_DATETIME=$(date +%Y-%m-%d_%H-%m-%S)
           CREATE_BUNDLE="tenantA_${CURRENT_DATETIME}"
-          echo "CREATE_BUNDLE=${CREATE_BUNDLE}" >> $GITHUB_OUTPUT
+          echo "CREATE_BUNDLE=${CREATE_BUNDLE}" >> $GITHUB_ENV
 
   EchoCreateBundleFromOtherJobs:
     name: Echo create bundle from other jobs
     needs: GenerateUniqueBundleName
     runs-on: ubuntu-latest
     steps:
-      - name: Set CREATE_BUNDLE variable
-        run: echo "CREATE_BUNDLE=${needs.jobs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE}" >> $GITHUB_ENV
-
       - name: Echo create bundle from other jobs
-        run: echo "${needs.jobs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE}"
+        run: |
+           echo ${{ needs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE }}
