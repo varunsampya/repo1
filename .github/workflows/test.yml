@@ -19,8 +19,6 @@ on:
         - 'tenantB'
         - 'multi_projects'
 
-env:
-  CREATE_BUNDLE: ${{ inputs.tenant }}_${{ date +%Y-%m-%d_%H-%m-%S-%N }}
 
 jobs:
   GenerateUniqueBundleName:
