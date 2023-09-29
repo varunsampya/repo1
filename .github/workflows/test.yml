@@ -1,16 +1,22 @@
-name: Print Workflow Environment Variable with Current Time
+name: dataiku
 
 on:
   push:
-    branches: [ master ]
+       branches: master
 
-env:
-  name: "test + $(date +%Y%m%d%H%M%S)"
+env: 
+    CREATE_BUNDLE: "test + $(date +%Y%m%d%H%M%S)"
+     
 
 jobs:
-  print_env_var:
+  GenerateUniqueBundleName:
+    name: Generate unique bundle name
     runs-on: ubuntu-latest
+  
     steps:
-      - name: Print name
-        run: echo "${{ env.name }}"
-
+      - name: Generate unique bundle name
+        id: generate
+        run: |
+          "${{ env.CREATE_BUNDLE }}"
+          
+  
