@@ -1,0 +1,28 @@
+name: dataiku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  GenerateUniqueBundleName:
+    name: Generate unique bundle name
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate unique bundle name
+        run: |
+          CURRENT_DATETIME=$(date +%Y-%m-%d_%H-%m-%S)
+
+          UNIQUE_BUNDLE_NAME="test_${CURRENT_DATETIME}"
+
+          echo "UNIQUE_BUNDLE_NAME=${UNIQUE_BUNDLE_NAME}" >> $GITHUB_ENV
+
+  UseUniqueBundleName:
+    name: Use unique bundle name
+    needs: GenerateUniqueBundleName
+
+    steps:
+      - name: Print unique bundle name
+        run: echo $UNIQUE_BUNDLE_NAME
