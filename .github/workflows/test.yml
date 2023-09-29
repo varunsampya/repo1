@@ -3,7 +3,7 @@ name: dataiku
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   GenerateUniqueBundleName:
@@ -18,11 +18,7 @@ jobs:
           UNIQUE_BUNDLE_NAME="test_${CURRENT_DATETIME}"
 
           echo "UNIQUE_BUNDLE_NAME=${UNIQUE_BUNDLE_NAME}" >> $GITHUB_ENV
+          echo $UNIQUE_BUNDLE_NAME
 
-  UseUniqueBundleName:
-    name: Use unique bundle name
-    needs: GenerateUniqueBundleName
-
-    steps:
-      - name: Print unique bundle name
-        run: echo $UNIQUE_BUNDLE_NAME
+ 
+        
