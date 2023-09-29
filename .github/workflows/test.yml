@@ -36,6 +36,8 @@ jobs:
     needs: GenerateUniqueBundleName
     runs-on: ubuntu-latest
     steps:
+      - name: Set CREATE_BUNDLE variable
+        run: echo "CREATE_BUNDLE=${needs.jobs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE}" >> $GITHUB_ENV
+
       - name: Echo create bundle from other jobs
-        run: |
-           echo ${needs.jobs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE}
+        run: echo "${needs.jobs.GenerateUniqueBundleName.outputs.CREATE_BUNDLE}"
