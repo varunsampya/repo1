@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 env:
-  MY_ENV_VAR: "This is a workflow environment variable."
+  MY_ENV_VAR: "test_${GITHUB.USER}"
 
 jobs:
   print_env_var:
